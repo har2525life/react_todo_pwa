@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../servise/firebaseConfig';
+import { AuthContext } from '../context/AuthProvider';
 
 const Header = () => {
 
-    const handleClick = async () => {
+    const { currentUser } = useContext(AuthContext)
+
+    const handleClick = () => {
+
         const provider = new GoogleAuthProvider()
-        await signInWithPopup(auth, provider)
+        signInWithPopup(auth, provider)
             .then(() => {
                 console.log('success')
             })
@@ -15,11 +19,19 @@ const Header = () => {
             })
     }
 
+    const logOut = () => {
+        auth.signOut()
+    }
 
     return (
         <header>
-            ヘッダー
-            <button onClick={handleClick}>ログイン</button>
+            {
+                currentUser ? (
+                    <button onClick={logOut}>ログアウト</button>
+                ) : (
+                    <button onClick={handleClick}>ログイン</button>
+                )
+            }
         </header>
     )
 }

@@ -1,12 +1,12 @@
-import './App.css';
 import Header from './components/Header';
+import AuthProvider from './context/AuthProvider';
 
 
 function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <Header />
-    </div>
+    </AuthProvider>
   );
 }
 
