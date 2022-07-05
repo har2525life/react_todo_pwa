@@ -25,13 +25,7 @@ const Header = () => {
 
     return (
         <header>
-            {
-                currentUser ? (
                     <button onClick={logOut}>ログアウト</button>
-                ) : (
-                    <button onClick={handleClick}>ログイン</button>
-                )
-            }
         </header>
     )
 }
